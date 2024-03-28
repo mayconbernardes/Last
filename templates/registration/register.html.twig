@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de Registrement {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">S'enregistrer</h1>
+
+            <form method="post" class="mt-4">
+                {{ form_errors(registrationForm) }}
+
+                {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    {{ form_row(registrationForm.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.plainPassword, {
+                        'label': 'Password',
+                        'attr': {'class': 'form-control', 'placeholder': 'Password'}
+                    }) }}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form_row(registrationForm.agreeTerms, {'label': 'I agree to the terms', 'attr': {'class': 'form-check-input'}}) }}
+                    <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}">I agree to the terms</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                {{ form_end(registrationForm) }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

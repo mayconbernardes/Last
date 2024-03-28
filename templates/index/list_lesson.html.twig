@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lessons{% endblock %}
+
+{% block body %}
+<div>
+    {% for language in languages %}
+        <a href="{{ path('app_list_lesson', {id : language.id }) }}">{{language.name}}</a>
+    {% endfor %}
+
+
+    {% for plop in lessons %}
+        <p>{{ plop.title }} - {{ plop.language.name }}</p>
+    {% endfor %}
+</div>
+{% endblock %}

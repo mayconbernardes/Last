@@ -3,10 +3,24 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<div>
-
-
-    <a href="{{ path('app_list_lesson')}}">Voir les lecons</a>
-    <a href="">Voir les quiz</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="border p-3 text-center">
+                <h2>Voir les leçons</h2>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{{ path('app_list_lesson')}}">Voir les leçons</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="border p-3 text-center">
+                <h2>Voir les quiz</h2>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#">Voir les quiz</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -4,9 +4,9 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         {# Left Column: Languages #}
-        <div class="col-md-6">
+        <div class="col-md-4 text-center" id="languages-column">
             <h2>Languages</h2>
             <ul class="list-group">
                 {# Loop through each language #}
@@ -17,22 +17,26 @@
         </div>
 
         {# Right Column: Lessons #}
-        <div class="col-md-6">
+       <div class="row justify-content-center">
+        <div class="col-md-8 row justify-content-center" id="lessons-column">
             <h2>Lessons</h2>
             <ul class="list-group">
                 {# Loop through each lesson #}
                 {% for plop in lessons %}
                     {# Audio player for the lesson #}
-                    <audio src="https://6a63fca904fd268f15f7-d5770ffdd579eb31eaa89faeffc55fe7.ssl.cf1.rackcdn.com/elementary-podcasts-s01-e01.mp3" controls="" style="width:100%" controlslist="nodownload" id="html5_audio_ol0hjrsmyxl"></audio>
+                    <audio controls style="width:100%">
+                        <source src="{{ plop.src }}" type="audio/mp3">
+                    </audio>
 
                     {# Displaying the title of the lesson #}
                     <h2 class="list-group-item text-center">- {{ plop.title }}</h2>
                     
                     {# Displaying the transcription and language of the lesson #}
-                    <li class="list-group-item text-justify">{{ plop.transcription }} - {{ plop.language.name }}</li>
+                    <li class="list-group-item">{{ plop.transcription }} - {{ plop.language.name }}</li>
                 {% endfor %}
             </ul>
         </div>
+     </div>
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,96 @@
+/* Gradient background main color*/
+body {
+font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background: radial-gradient(circle, rgba(57, 178, 205, 1) 0%, rgba(252, 175, 70, 1) 100%);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* For the background video , it goes also with the html video tag */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+#video-content {
+    z-index: 1; /* Sets the  of the content to be above the video (1) */
+    position: relative;  /* positioned relative to its normal position */
+
+}
+/* Centering main two buttons */
+.main-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+html, body {
+    height: 100%;
+}
+
+main {
+    flex: 1;
+}
+
+/* navbar backgroundcolor */
+.custom-navbar-bg {
+    background-color: #1B23AC !important;
+}
+
+/* Put border around buttons */
+.navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .show>.nav-link {
+    color: #fff;
+    border-radius: 5px;
+    border: white solid 0.1px;
+    margin: 2px;
+    padding: 9px;
+}
+
+/* btn to connect */
+.btn-primary {
+    color: #fff;
+    background-color: #1B23AC;
+    border-color: #1B23AC;
+}
+.btn-primary:hover {
+    background-color: #0d1474;
+    border-color: #0d1474;
+}
+
+/* the lessons title's names */
+.text-center {
+    text-align: center !important;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+/* the transcriptions texts of lessons  */
+.list-group-item+.list-group-item , .list-group-item:first-child {
+    border-top-width: 0;
+    border-radius: 10px;
+    margin-top: 4px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+/* for the languages choice  */
+a {
+    color: #1b23ac;
+    text-decoration: none !important;
+}
+.list-group-item {
+    border-top-width: 0;
+    font-size: 25px !important;
+    line-height: 200% !important;
+    text-align: justify !important;
+}
+pre{
+    
+    overflow-x:hidden !important;
+    justify-content: center !important;
+
+}

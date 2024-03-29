@@ -24,4 +24,10 @@ class IndexController extends AbstractController
            "languages" => $languageRepository->findAll()
         ]);
     }
+
+    #[Route('/mentionslegales', name: 'app_mentions')]
+    public function mentions(): Response
+    {
+        return $this->render('index/mentionsLegales.html.twig');
+    }
 }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion !{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -13,17 +13,17 @@
 
                 {% if app.user %}
                     <div class="alert alert-info">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
                     </div>
                 {% endif %}
 
-                <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                <h1 class="h3 mb-3 font-weight-normal text-center">Veuillez vous connecter</h1>
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword">Password</label>
+                    <label for="inputPassword">Mot de passe</label>
                     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
                 </div>
 
@@ -31,10 +31,10 @@
 
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="rememberMe" name="_remember_me">
-                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                    <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
             </form>
         </div>
     </div>

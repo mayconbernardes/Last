@@ -18,7 +18,7 @@
                 <div class="form-group">
                     {{ form_row(registrationForm.plainPassword, {
                         'label': 'Password',
-                        'attr': {'class': 'form-control', 'placeholder': 'Password'}
+                        'attr': {'class': 'form-control', 'placeholder': 'Mot-de-passe'}
                     }) }}
                 </div>
                 <div class="form-check mb-3">
@@ -26,7 +26,7 @@
                     <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}">J'accepte les conditions</label>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                <button type="submit" class="btn btn-primary btn-block">S'enregistrer</button>
                 {{ form_end(registrationForm) }}
             </form>
         </div>

@@ -11,15 +11,17 @@
 <div class="container text-blur">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center mt-5">
-            <h1>Prêt à vous amuser tout en apprenant ?</h1>
-            <p>Explorez notre large gamme de leçons et de quiz pour enrichir votre expérience d'apprentissage.</p>
+            <h1 class="display-4">Prêt à vous amuser tout en apprenant ?</h1>
+           
+            <p class="lead">Explorez notre large gamme de leçons et de quiz pour enrichir votre expérience d'apprentissage.</p>
         </div>
     </div>
     <div class="row justify-content-center mt-5 mb-md-4">
         <div class="col-md-4">
             <div class="card border-0 shadow text-center mb-4">
                 <div class="card-body">
-                    <h2 class="card-title">Explorez les Leçons</h2>
+                    <h2 class="card-title">Leçons audio</h2>
+                     <img src="img/audio.jpg" alt="my logot" class="img-fluid" style="max-width: 100%; height: auto;">
                     <p class="card-text">Découvrez diverses leçons dans différentes langues.</p>
                     {% if app.user %}
                         <a href="{{ path('app_list_lesson')}}" class="btn btn-primary btn-lg btn-block">Commencer l'Apprentissage</a>
@@ -32,7 +34,8 @@
         <div class="col-md-4">
             <div class="card border-0 shadow text-center">
                 <div class="card-body">
-                    <h2 class="card-title">Faites des Quiz</h2>
+                    <h2 class="card-title">Quiz</h2>
+                     <img src="img/quiz.jpg" alt="my logot" class="img-fluid" style="max-width: 100%; height: auto;">
                     <p class="card-text">Testez vos connaissances avec nos quiz interactifs.</p>
                     {% if app.user %}
                         <a href="#" class="btn btn-primary btn-lg btn-block">Passer un Quiz</a>

@@ -88,9 +88,12 @@ a {
     line-height: 200% !important;
     text-align: justify !important;
 }
+/* tag used to keep original form of the mentions legales created */
 pre{
-    
     overflow-x:hidden !important;
     justify-content: center !important;
-
+}
+/* to give distance of mention legales  */
+.mentions{
+    margin-top: 70px;
 }

@@ -29,4 +29,3 @@ security:
     access_control:
         - { path: ^/lessons, roles: ROLE_USER }
         - { path: ^/quiz, roles: ROLE_USER }
-        - { path: ^/admin, roles: ROLE_ADMIN } # Restrict access to /lessons to authenticated users

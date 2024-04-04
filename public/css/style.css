@@ -165,17 +165,18 @@ header {
   background-color: #334155;
   border-radius: 0.4rem;
   padding: 0.7rem 1rem;
-  margin-right: 1rem; // Must used margin-right instead of gap for the loop to be smooth
+  margin-right: 1rem;
   box-shadow: 
     0 0.1rem 0.2rem rgb(0 0 0 / 20%),
     0 0.1rem 0.5rem rgb(0 0 0 / 30%),
     0 0.2rem 1.5rem rgb(0 0 0 / 40%);
+}
   
   span {
     font-size: 1.2rem;
     color: #64748b;
   }
-}
+
 
 .fade {
   pointer-events: none;
@@ -192,3 +193,12 @@ header {
     transform: translateX(-50%);
   }
 }
+
+ul {
+  margin-top: 0;
+  margin-bottom: -3rem;
+  line-height: 10px;
+  padding-left: 2rem;
+}
+
+

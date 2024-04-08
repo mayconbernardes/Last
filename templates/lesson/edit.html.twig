@@ -1,21 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier la leçon{% endblock %}
+{% block title %}
+    Modifier la leçon
+{% endblock %}
 
 {% block body %}
 <div class="container">
     <h1 class="mt-4 mb-3 text-center">Modifier la leçon</h1>
 
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            {{ include('lesson/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    {{ include('lesson/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-6 text-center">
-            <a href="{{ path('app_lesson_index') }}" class="btn btn-secondary mr-2">Retour à la liste</a>
-            {{ include('lesson/_delete_form.html.twig') }}
+    <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6">
+                    <a href="{{ path('app_lesson_index') }}" class="btn btn-secondary btn-block">Retour à la liste</a>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#deleteModal">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cette leçon ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <form action="{{ path('app_lesson_delete', {'id': lesson.id}) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lesson.id) }}">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

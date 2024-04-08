@@ -3,17 +3,26 @@
 {% block title %}Hello QuizController!{% endblock %}
 
 {% block body %}
-<div>
-    <h1>{{ quizz.title }}</h1>
-    <p>{{quizz.description}}</p>
-
-    {% for question in quizz.questions %}
-        <h2>{{ question.question}}</h2>
-        <ul>
-            {% for answer in question.responses %}
-                <li>{{ answer.response }}</li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card my-4">
+                <div class="card-body">
+                    <h1 class="card-title text-center">{{ quizz.title }}</h1>
+                    <p class="card-text text-center">{{ quizz.description }}</p>
+                    {% for question in quizz.questions %}
+                    <div class="mb-4">
+                        <h2>{{ question.question }}</h2>
+                        <ul class="list-unstyled">
+                            {% for answer in question.responses %}
+                            <li>{{ answer.response }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

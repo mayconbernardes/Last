@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lessons{% endblock %}
+{% block title %}Leçons{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row justify-content-center">
         {# Left Column: Languages #}
-        <div class="col-md-4 text-center" id="languages-column">
-            <h2>Languages</h2>
-            <ul class="list-group">
-                {# Loop through each language #}
-                {% for language in languages %}
-                    <li class="list-group-item"><a href="{{ path('app_list_lesson', {id : language.id }) }}">{{language.name}}</a></li>
-                {% endfor %}
-            </ul>
+        {% for language in languages %}
+        <div class="col-md-4 mb-4 mt-4">
+            <div class="card">
+               <div class="card-body text-center card-body-background">
+                    <h2>{{ language.name }}</h2>
+                    <a href="{{ path('app_list_lesson', { id: language.id }) }}" class="btn btn-primary">Voir leçon</a>
+                </div>
+            </div>
         </div>
+        {% endfor %}
+    </div>
+</div>
 
         {# Right Column: Lessons #}
        <div class="row justify-content-center">
         <div class="col-md-8 row justify-content-center" id="lessons-column">
-            <h2>Lessons</h2>
+            <h2>Leçons</h2>
             <ul class="list-group">
                 {# Loop through each lesson #}
                 {% for plop in lessons %}

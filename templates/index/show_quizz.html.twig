@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %} {% block title %}Quiz {{ quiz.title }} {%
+endblock %} {% block body %}
+<h2>{{ quiz.title }}</h2>
+<p>{{ quiz.description }}</p>
+<form method="POST">
+  {% for question in quiz.questions %}
+  <p>{{ question.text }}</p>
+  {% for answer in question.answers %}
+  <p>Réponse : {{ answer.text }}</p>
+  <input
+    type="checkbox"
+    id="{{answer.id}}"
+    name="answers[]"
+    value="{{question.id ~ '-' ~ answer.id}}"
+  />
+  {% endfor %}
+  <hr />
+  {% endfor %}
+  <button type="submit">Envoyer</button>
+</form>
+{% endblock %}

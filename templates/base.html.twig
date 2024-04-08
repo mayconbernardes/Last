@@ -1,58 +1,81 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Bienvenue{% endblock %}</title>
-    {# for the icon next to the title #}
-    <link rel="icon" href="img/ico.png" type="image/png">
-    {# responsive viewport #}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {# my custom css #}
-    <link rel="stylesheet" href="{{asset("css/style.css")}}">
-    {# bootstrap links #}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-</head>
-<body>
-  <header class="navbar navbar-expand-lg navbar-dark custom-navbar-bg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{{ path('app_index') }}">
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" width="200" height="40">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          {% if app.user %}
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Logout</a></li>
-          {% else %}
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">S'enregistrer</a></li>
-            <li class="nav-item"><a class="nav-link active" href="{{ path('app_login') }}">Login</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-  </header>
-<main>
-    {% block body %}{% endblock %}
-</main>    
-<footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-dark">Nos contacter</a></li>
-        <li class="nav-item"><a href="{{path('app_mentions')}}" class="nav-link px-2 text-dark">Mentions légales</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-dark">À propos de nous</a></li>
-    </ul>
-    <p class="text-center text-dark">© 2021 Company, Inc</p>
-</footer>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Bienvenue
+			{% endblock %}
+		</title>
+		{# for the icon next to the title #}
+		<link
+		rel="icon" href="img/ico.png" type="image/png">
+		{# responsive viewport #}
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1">
+		{# my custom css #}
+		<link
+		rel="stylesheet" href="{{asset("css/style.css")}}">
+		{# bootstrap links #}
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		<header class="navbar navbar-expand-lg navbar-dark custom-navbar-bg">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ path('app_index') }}">
+					<img src="{{ asset('img/logo.png') }}" alt="Logo" width="200" height="40">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+					<ul class="navbar-nav">
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Logout</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">S'enregistrer</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="{{ path('app_login') }}">Login</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</header>
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+		<footer class="py-3 my-4">
+			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-dark">Nos contacter</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{path('app_mentions')}}" class="nav-link px-2 text-dark">Mentions légales</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-dark">À propos de nous</a>
+				</li>
+			</ul>
+			<p class="text-center text-dark">© 2021 Company, Inc</p>
+		</footer>
 
-{# bootstrap js #}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
+		{# bootstrap js #}
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
 
-<video autoplay muted loop id="video-background" plays-inline>
-  <source src="video/vv.mp4" type="video/mp4">
-</video>
+		<video autoplay muted loop id="video-background" plays-inline>
+			<source src="video/vv.mp4" type="video/mp4">
+		</video>
 
-</body>
+	</body>
 </html>

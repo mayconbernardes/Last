@@ -75,7 +75,7 @@
                      <img src="img/quiz.jpg" alt="my logot" class="img-fluid" style="max-width: 100%; height: auto;">
                     <p class="card-text">Testez vos connaissances avec nos quiz interactifs.</p>
                     {% if app.user %}
-                        <a href="#" class="btn btn-primary btn-lg btn-block">Passer un Quiz</a>
+                        <a href="{{ path('app_quizzes') }}" class="btn btn-primary btn-lg btn-block">Passer un Quiz</a>
                     {% else %}
                         <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg btn-block">Connectez-vous ou inscrivez-vous</a>
                     {% endif %}

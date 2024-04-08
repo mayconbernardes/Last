@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Quiz;
 use App\Repository\LanguageRepository;
 use App\Repository\LessonRepository;
+use App\Repository\QuizRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+
 
 class IndexController extends AbstractController
 {
@@ -29,5 +33,25 @@ class IndexController extends AbstractController
     public function mentions(): Response
     {
         return $this->render('index/mentionsLegales.html.twig');
+    }
+
+    #[Route('/quizzes', name: 'app_quizzes')]
+    public function quizzes(QuizRepository $quizRepository): Response
+    {
+        return $this->render('index/list_quizz.html.twig', [
+            'quizzes' => $quizRepository->findAll()
+        ]);
+    }
+
+    #[Route('/show_quiz/{id}', name: 'app_show_quizz')]
+    public function showQuiz(Request $request, Quiz $quiz): Response
+    {
+        // traitement form
+        if ($request->getMethod() === 'POST') {
+            dd($_POST);
+        }
+        return $this->render('index/show_quizz.html.twig', [
+            'quiz' => $quiz
+        ]);
     }
 }

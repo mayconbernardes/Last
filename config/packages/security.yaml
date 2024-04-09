@@ -29,3 +29,5 @@ security:
     access_control:
         - { path: ^/lessons, roles: ROLE_USER }
         - { path: ^/quiz, roles: ROLE_USER }
+        - { path: ^/admin/quiz, roles: ROLE_ADMIN }
+        - { path: ^/admin/lesson, roles: ROLE_ADMIN }

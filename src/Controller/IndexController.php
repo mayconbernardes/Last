@@ -34,6 +34,11 @@ class IndexController extends AbstractController
     {
         return $this->render('index/mentionsLegales.html.twig');
     }
+    #[Route('/aproposdenous', name: 'app_a_propos_de_nous')]
+    public function apropos(): Response
+    {
+        return $this->render('index/AProposDeNous.html.twig');
+    }
 
     #[Route('/quizzes', name: 'app_quizzes')]
     public function quizzes(QuizRepository $quizRepository): Response
@@ -48,7 +53,7 @@ class IndexController extends AbstractController
     {
         // traitement form
         if ($request->getMethod() === 'POST') {
-            dd($_POST);
+            // dd($_POST);
         }
         return $this->render('index/show_quizz.html.twig', [
             'quiz' => $quiz

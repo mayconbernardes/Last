@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/quiz')]
 class QuizController extends AbstractController
@@ -38,7 +38,7 @@ class QuizController extends AbstractController
 
         return $this->render('quiz/new.html.twig', [
             'quiz' => $quiz,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -64,14 +64,14 @@ class QuizController extends AbstractController
 
         return $this->render('quiz/edit.html.twig', [
             'quiz' => $quiz,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_quiz_delete', methods: ['POST'])]
     public function delete(Request $request, Quiz $quiz, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$quiz->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$quiz->getId(), $request->request->get('_token'))) {
             $entityManager->remove($quiz);
             $entityManager->flush();
         }

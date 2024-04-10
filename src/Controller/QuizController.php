@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
 use App\Entity\Quiz;
+use App\Form\AnswerType;
 use App\Form\QuizType;
 use App\Repository\QuizRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,7 +35,7 @@ class QuizController extends AbstractController
             $entityManager->persist($quiz);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_quiz_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_quiz_add_answers', ['id' => $quiz->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('quiz/new.html.twig', [
@@ -42,7 +44,7 @@ class QuizController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_quiz_show', methods: ['GET'])]
+    #[Route('/{id}/show', name: 'app_quiz_show', methods: ['GET'])]
     public function show(Quiz $quiz): Response
     {
         return $this->render('quiz/show.html.twig', [
@@ -78,4 +80,5 @@ class QuizController extends AbstractController
 
         return $this->redirectToRoute('app_quiz_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

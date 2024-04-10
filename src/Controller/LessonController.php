@@ -71,11 +71,11 @@ class LessonController extends AbstractController
     #[Route('/{id}', name: 'app_lesson_delete', methods: ['POST'])]
     public function delete(Request $request, Lesson $lesson, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->request->get('_token'))) {
             $entityManager->remove($lesson);
             $entityManager->flush();
         }
-
+    
         return $this->redirectToRoute('app_lesson_index', [], Response::HTTP_SEE_OTHER);
     }
 }

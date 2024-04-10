@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Scores for User{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Scores for User</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Quiz</th>
+                        <th>Score</th>
+                        <th>Date Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for score in scores %}
+                        <tr>
+                            <td>{{ app.user.email }}</td> {# Assuming username is a property of the User entity #}
+                            <td>{{ score.quiz.title }}</td>
+                            <td>{{ score.score }}</td>
+                            <td>{{ score.dateCompleted|date('Y-m-d') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

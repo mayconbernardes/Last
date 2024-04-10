@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Quiz{% endblock %}
+{% block title %}Modifier le Quiz{% endblock %}
 
 {% block body %}
-    <h1>Edit Quiz</h1>
+    <div class="container">
+        <h1 class="text-center mb-4">Modifier le Quiz</h1>
 
-    {{ include('quiz/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('quiz/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-   <div class="text-center mt-3">
-    <a href="{{ path('app_quiz_index') }}" class="btn btn-secondary">Back to List</a></div>
+        <div class="text-center mt-3">
+            <a href="{{ path('app_quiz_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        </div>
 
-    {{ include('quiz/_delete_form.html.twig') }}
+        {{ include('quiz/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

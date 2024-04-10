@@ -26,7 +26,12 @@
                     <td>{{ lesson.src }}</td>
                     <td>
                         <a href="{{ path('app_lesson_show', {'id': lesson.id}) }}" class="btn btn-info btn-sm mr-2">Voir</a>
-                        <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}" class="btn btn-primary btn-sm mr-2">Modifier</a>
+                        <form action="{{ path('app_lesson_delete', {'id': lesson.id}) }}" method="post" style="display: inline-block;">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lesson.id) }}">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette leçon ?')">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
                 {% else %}

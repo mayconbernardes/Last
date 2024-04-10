@@ -22,11 +22,11 @@ class Score
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $user = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
     private ?quiz $quiz = null;
+
+    #[ORM\ManyToOne(inversedBy: 'scores')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -57,18 +57,6 @@ class Score
         return $this;
     }
 
-    public function getUser(): ?user
-    {
-        return $this->user;
-    }
-
-    public function setUser(?user $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getQuiz(): ?quiz
     {
         return $this->quiz;
@@ -77,6 +65,18 @@ class Score
     public function setQuiz(?quiz $quiz): static
     {
         $this->quiz = $quiz;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

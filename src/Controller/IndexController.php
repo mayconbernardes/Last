@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Quiz;
+use App\Entity\Score;
+use App\Repository\AnswerRepository;
 use App\Repository\LanguageRepository;
 use App\Repository\LessonRepository;
 use App\Repository\QuizRepository;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 
 class IndexController extends AbstractController
+
 {
     #[Route('/', name: 'app_index')]
     public function index(): Response
@@ -49,11 +54,24 @@ class IndexController extends AbstractController
     }
 
     #[Route('/show_quiz/{id}', name: 'app_show_quizz')]
-    public function showQuiz(Request $request, Quiz $quiz): Response
+    public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerRepository, EntityManagerInterface $entityManager): Response
     {
-        // traitement form
+        $score = new Score();
+        $score->setQuiz($quiz);
+        $score->setUser($this->getUser());
+
         if ($request->getMethod() === 'POST') {
-            // dd($_POST);
+            $answers = $_POST['answers'];
+            $score->setDateCompleted(new \DateTimeImmutable());
+
+            foreach($answers as $answer) {
+                $answerObjet = $answerRepository->find($answer);
+                if ($answerObjet->isIsCorrect()) {
+                    $score->setScore($score->getScore() + 1);
+                }
+            }
+            $entityManager->persist($score);
+            $entityManager->flush();
         }
         return $this->render('index/show_quizz.html.twig', [
             'quiz' => $quiz

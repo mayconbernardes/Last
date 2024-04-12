@@ -37,13 +37,9 @@
 				<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 					<ul class="navbar-nav">
 						{% if app.user %}
-						<li class="nav-item">
-						   <a class="nav-link active" aria-current="page" href="{{ path('app_scores_for_user', {'id': app.user.id}) }}">Mon score</a>
-							</li>
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Logout</a>
 							</li>
-							
 						{% else %}
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">S'enregistrer</a>

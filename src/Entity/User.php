@@ -41,10 +41,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Lesson::class, inversedBy: 'users')]
     private Collection $user;
 
+    #[ORM\ManyToMany(targetEntity: Answer::class, inversedBy: 'users')]
+    private Collection $answer;
+    
     public function __construct()
     {
         $this->scores = new ArrayCollection();
         $this->user = new ArrayCollection();
+        $this->answer = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,4 +179,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Answer>
+     */
+    public function getAnswer(): Collection
+    {
+        return $this->answer;
+    }
+
+    public function addAnswer(Answer $answer): static
+    {
+        if (!$this->answer->contains($answer)) {
+            $this->answer->add($answer);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): static
+    {
+        $this->answer->removeElement($answer);
+
+        return $this;
+    }
+
 }

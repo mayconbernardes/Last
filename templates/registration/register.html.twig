@@ -30,7 +30,7 @@
 
                         <div class="form-check">
                             {{ form_row(registrationForm.agreeTerms, {'label': "J'accepte les conditions", 'attr': {'class': 'form-check-input'}}) }}
-                            <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}">J'accepte les conditions</label>
+                            <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}"></label>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block mt-3">S'enregistrer</button>
@@ -42,3 +42,4 @@
     </div>
 </div>
 {% endblock %}
+ 

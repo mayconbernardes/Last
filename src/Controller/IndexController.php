@@ -54,27 +54,34 @@ class IndexController extends AbstractController
     }
 
     #[Route('/show_quiz/{id}', name: 'app_show_quizz')]
-    public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerRepository, EntityManagerInterface $entityManager): Response
-    {
-        $score = new Score();
-        $score->setQuiz($quiz);
-        $score->setUser($this->getUser());
+public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerRepository, EntityManagerInterface $entityManager): Response
+{
+    $score = new Score();
+    $score->setQuiz($quiz);
+    $score->setUser($this->getUser());
 
-        if ($request->getMethod() === 'POST') {
-            $answers = $_POST['answers'];
-            $score->setDateCompleted(new \DateTimeImmutable());
+    if ($request->getMethod() === 'POST') {
+        $answers = $_POST['answers'];
+        $score->setDateCompleted(new \DateTimeImmutable());
 
-            foreach($answers as $answer) {
-                $answerObjet = $answerRepository->find($answer);
-                if ($answerObjet->isIsCorrect()) {
-                    $score->setScore($score->getScore() + 1);
-                }
+        foreach ($answers as $answer) {
+            $answerObjet = $answerRepository->find($answer);
+            if ($answerObjet->isIsCorrect()) {
+                $score->setScore($score->getScore() + 1);
             }
-            $entityManager->persist($score);
-            $entityManager->flush();
         }
-        return $this->render('index/show_quizz.html.twig', [
-            'quiz' => $quiz
-        ]);
+        $entityManager->persist($score);
+        $entityManager->flush();
+
+        // Retrieve the redirect URL from the form submission
+        $redirectUrl = $request->request->get('redirect_url');
+
+        // Redirect the user to the specified URL
+        return $this->redirect($redirectUrl);
+    }
+
+    return $this->render('index/show_quizz.html.twig', [
+        'quiz' => $quiz
+    ]);
     }
 }

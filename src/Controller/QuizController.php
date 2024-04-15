@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Answer;
 use App\Entity\Quiz;
-use App\Form\AnswerType;
 use App\Form\QuizType;
 use App\Repository\QuizRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -70,6 +68,7 @@ class QuizController extends AbstractController
         ]);
     }
 
+
     #[Route('/{id}', name: 'app_quiz_delete', methods: ['POST'])]
     public function delete(Request $request, Quiz $quiz, EntityManagerInterface $entityManager): Response
     {
@@ -81,4 +80,14 @@ class QuizController extends AbstractController
         return $this->redirectToRoute('app_quiz_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/{id}/add-answers', name: 'app_quiz_add_answers', methods: ['GET', 'POST'])]
+    public function addAnswers(Request $request, Quiz $quiz, EntityManagerInterface $entityManager): Response
+    {
+        // Here you can implement logic to add answers to the quiz
+        // For simplicity, I'll assume you have a separate form for adding answers
+        // You can replace this with your actual implementation
+        
+        // Redirect to quiz index after adding answers
+        return $this->redirectToRoute('app_quiz_index');
+    }
 }

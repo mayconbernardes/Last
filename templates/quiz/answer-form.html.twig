@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réponses{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mt-4 mb-3 text-center">Ajouter des réponses</h1>
+
+    <div class="row justify-content-center">
+    {% for question in questions %}
+        <p>{{question.text}}</p>
+        <div class="col-md-6">
+            {{ form(form) }}
+        </div>
+    {% endfor %}
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6 text-center">
+            <a href="{{ path('app_lesson_index') }}" class="btn btn-secondary">Retour à la Liste des quiz</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

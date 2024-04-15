@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\QuizRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
@@ -19,15 +18,19 @@ class Quiz
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
     #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'quiz', orphanRemoval: true, cascade: ["persist"])]
     private Collection $questions;
 
+    #[ORM\OneToMany(targetEntity: Score::class, mappedBy: 'quiz')]
+    private Collection $scores;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -40,7 +43,7 @@ class Quiz
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -52,7 +55,7 @@ class Quiz
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -67,17 +70,17 @@ class Quiz
         return $this->questions;
     }
 
-    public function addQuestion(Question $question): static
+    public function addQuestion(Question $question): self
     {
         if (!$this->questions->contains($question)) {
-            $this->questions->add($question);
+            $this->questions[] = $question;
             $question->setQuiz($this);
         }
 
         return $this;
     }
 
-    public function removeQuestion(Question $question): static
+    public function removeQuestion(Question $question): self
     {
         if ($this->questions->removeElement($question)) {
             // set the owning side to null (unless already changed)
@@ -87,5 +90,13 @@ class Quiz
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Score>
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores;
     }
 }

@@ -31,7 +31,7 @@ font-family: 'Poppins', sans-serif;
     margin-top: 20px;
 }
 
-html, body {
+html {
     height: 100%;
 }
 
@@ -197,8 +197,13 @@ header {
 ul {
   margin-top: 0;
   margin-bottom: -3rem;
-  line-height: 10px;
+  line-height: 20px;
   padding-left: 2rem;
 }
 
-
+/* message register login page */
+::marker {
+  color: rgb(236, 15, 15); /* Change the color of the marker */
+  font-size: 20px; /* Adjust the size of the marker */
+  /* Add any other desired styles */
+}

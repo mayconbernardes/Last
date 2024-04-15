@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Quiz;
+use App\Entity\Score;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class QuizType extends AbstractType
 {
@@ -27,13 +29,19 @@ class QuizType extends AbstractType
                     'data-form-collection-delete-label-value' => 'Supprimer une question'
                 ]
             ])
-        ;
+            ->add('submit', ButtonType::class, [
+                'label' => 'Submit', // Set the label for the button
+                'attr' => [
+                    'class' => 'btn btn-primary', // Add any additional attributes you need
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Quiz::class,
+            'data_class' => Score::class,
         ]);
     }
 }

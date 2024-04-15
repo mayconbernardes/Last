@@ -16,7 +16,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for score in scores %}
+                    <pre>
+                    </pre>
+                        {# {{ dump(scores) }} #}
+                    {% for score in app.user.scores %}
                         <tr>
                             <td>{{ app.user.email }}</td> {# Assuming username is a property of the User entity #}
                             <td>{{ score.quiz.title }}</td>

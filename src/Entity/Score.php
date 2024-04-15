@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ScoreRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ScoreRepository::class)]
@@ -17,16 +16,16 @@ class Score
     #[ORM\Column]
     private ?int $score = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_completed = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $dateCompleted = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?quiz $quiz = null;
-
-    #[ORM\ManyToOne(inversedBy: 'scores')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'scores')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\ManyToOne(targetEntity: Quiz::class, inversedBy: 'scores')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Quiz $quiz = null;
 
     public function getId(): ?int
     {
@@ -38,7 +37,7 @@ class Score
         return $this->score;
     }
 
-    public function setScore(int $score): static
+    public function setScore(int $score): self
     {
         $this->score = $score;
 
@@ -47,24 +46,12 @@ class Score
 
     public function getDateCompleted(): ?\DateTimeInterface
     {
-        return $this->date_completed;
+        return $this->dateCompleted;
     }
 
-    public function setDateCompleted(\DateTimeInterface $date_completed): static
+    public function setDateCompleted(\DateTimeInterface $dateCompleted): self
     {
-        $this->date_completed = $date_completed;
-
-        return $this;
-    }
-
-    public function getQuiz(): ?quiz
-    {
-        return $this->quiz;
-    }
-
-    public function setQuiz(?quiz $quiz): static
-    {
-        $this->quiz = $quiz;
+        $this->dateCompleted = $dateCompleted;
 
         return $this;
     }
@@ -74,9 +61,21 @@ class Score
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getQuiz(): ?Quiz
+    {
+        return $this->quiz;
+    }
+
+    public function setQuiz(?Quiz $quiz): self
+    {
+        $this->quiz = $quiz;
 
         return $this;
     }

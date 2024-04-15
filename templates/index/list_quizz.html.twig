@@ -3,21 +3,64 @@
 {% block title %}Quiz{% endblock %}
 
 {% block body %}
+<h1 class="text-center">Quiz</h1>
 <div class="container">
     <div class="row justify-content-center">
         {% for quiz in quizzes %}
         <div class="col-md-4 mb-4 mt-4">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">{{ quiz.title }}</h6>
-                    <h6 class="card-title">N°{{ quiz.id }}</h6>
-                    <a href="{{ path('app_show_quizz', { id: quiz.id }) }}" class="btn btn-primary">Start Quiz</a>
-                    {% set score = app.user ? app.user.id(quiz.id) %}
-                    {% if score %}
-                    <p>Points {{ score }}</p>
-                    {% else %}
-                    <p>No score available</p>
-                    {% endif %}
+                    <h4 class="card-title">{{ quiz.title }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">N°{{ quiz.id }}</h6>
+                    <a href="{{ path('app_show_quizz', { id: quiz.id }) }}" class="btn btn-primary btn-block">Start Quiz</a>
+
+                    <p>
+                        <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#collapseExample{{ quiz.id }}" role="button" aria-expanded="false" aria-controls="collapseExample{{ quiz.id }}">
+                            Voir - Points 
+                        </a>
+                    </p>
+                    <div class="collapse" id="collapseExample{{ quiz.id }}">
+                        <div class="card card-body">
+                            {% set quizScore = app.user ? app.user.id(quiz.id) %}
+                            {% if quizScore %}
+                            <hr>
+                            {% else %}
+                            <hr>
+                            <p class="text-center">No score available</p>
+                            {% endif %}
+                            <div class="container mt-4">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Score</th>
+                                                <th>Date Completed</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for score in quiz.scores %}
+                                            <tr>
+                                                <td>
+                                                    {% set userScore = score.score %}
+                                                    {% if userScore >= 90 %}
+                                                        <span class="text-success">{{ userScore }} (Excellent)</span>
+                                                    {% elseif userScore >= 70 %}
+                                                        <span class="text-primary">{{ userScore }} (Good)</span>
+                                                    {% elseif userScore >= 50 %}
+                                                        <span class="text-warning">{{ userScore }} (Average)</span>
+                                                    {% else %}
+                                                        <span class="text-danger">{{ userScore }}</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ score.dateCompleted|date('Y-m-d') }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

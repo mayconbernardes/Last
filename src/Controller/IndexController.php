@@ -54,7 +54,7 @@ class IndexController extends AbstractController
     }
 
     #[Route('/show_quiz/{id}', name: 'app_show_quizz')]
-public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerRepository, EntityManagerInterface $entityManager): Response
+    public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerRepository, EntityManagerInterface $entityManager): Response
 {
     $score = new Score();
     $score->setQuiz($quiz);
@@ -86,10 +86,15 @@ public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerR
     }
     
     #[Route('/language_selection', name: 'app_language_selection')]
-public function languageSelection(LanguageRepository $languageRepository): Response
+    public function languageSelection(LanguageRepository $languageRepository): Response
 {
     return $this->render('index/language_selection.html.twig', [
         'languages' => $languageRepository->findAll()
     ]);
+}
+    #[Route('/access-denied', name: 'app_access_denied')]
+    public function accessDenied(): Response
+    {
+        return $this->render('index/access_denied.html.twig');
 }
 }

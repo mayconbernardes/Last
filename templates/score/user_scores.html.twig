@@ -9,7 +9,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>User</th>
                         <th>Quiz</th>
                         <th>Score</th>
                         <th>Date Completed</th>
@@ -21,7 +20,6 @@
                         {# {{ dump(scores) }} #}
                     {% for score in app.user.scores %}
                         <tr>
-                            <td>{{ app.user.email }}</td> {# Assuming username is a property of the User entity #}
                             <td>{{ score.quiz.title }}</td>
                             <td>{{ score.score }}</td>
                             <td>{{ score.dateCompleted|date('Y-m-d') }}</td>

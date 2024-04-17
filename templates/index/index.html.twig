@@ -52,8 +52,10 @@
     <div class="fade"></div>
   </div>
 </div>
+
+<div class="d-flex flex-column justify-content-center align-items-center">
     </div>
-    <div class="row justify-content-center mt-5 mb-md-4">
+    <div class="row justify-content-center mt-5 mb-md-4 w-75">
         <div class="col-md-4">
             <div class="card border-0 shadow text-center mb-4">
                 <div class="card-body">
@@ -61,7 +63,7 @@
                      <img src="img/audio.jpg" alt="my logot" class="img-fluid" style="max-width: 100%; height: auto;">
                     <p class="card-text">Découvrez diverses leçons dans différentes langues.</p>
                     {% if app.user %}
-                        <a href="{{ path('app_language_selection')}}" class="btn btn-primary btn-lg btn-block">Commencer l'Apprentissage</a>
+                        <a href="{{ path('app_language_selection')}}" class="btn btn-primary btn-lg btn-block">Commencer</a>
                     {% else %}
                         <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg btn-block">Connectez-vous ou inscrivez-vous</a>
                     {% endif %}
@@ -75,7 +77,7 @@
                      <img src="img/quiz.jpg" alt="my logot" class="img-fluid" style="max-width: 100%; height: auto;">
                     <p class="card-text">Testez vos connaissances avec nos quiz interactifs.</p>
                     {% if app.user %}
-                        <a href="{{ path('app_quizzes') }}" class="btn btn-primary btn-lg btn-block">Passer un Quiz</a>
+                        <a href="{{ path('app_quizzes') }}" class="btn btn-primary btn-lg btn-block">Commencer</a>
                     {% else %}
                         <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg btn-block">Connectez-vous ou inscrivez-vous</a>
                     {% endif %}
@@ -84,7 +86,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-5 w-75">
         <div class="col-md-6">
             <div class="container">
                 <div class="row justify-content-center">
@@ -97,7 +99,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-5 w-75">
         <div class="col-md-6">
             <form action="https://formspree.io/f/myyrnjav" method="POST">
                 <div class="form-group">
@@ -113,4 +115,6 @@
         </div>
     </div>
 </div>
+<div>
+
 {% endblock %}

@@ -84,4 +84,12 @@ public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerR
         'quiz' => $quiz
     ]);
     }
+    
+    #[Route('/language_selection', name: 'app_language_selection')]
+public function languageSelection(LanguageRepository $languageRepository): Response
+{
+    return $this->render('index/language_selection.html.twig', [
+        'languages' => $languageRepository->findAll()
+    ]);
+}
 }

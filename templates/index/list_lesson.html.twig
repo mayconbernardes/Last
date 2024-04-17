@@ -3,17 +3,14 @@
 {% block title %}Leçons{% endblock %}
 
 {% block body %}
-<h1 class="text-center">Leçons</h1>
+<h1 class="text-center">Leçon</h1>
 <div class="container">
     <div class="row justify-content-center">
         {# Left Column: Languages #}
         {% for language in languages %}
         <div class="col-md-4 mb-4 mt-4">
             <div class="card">
-                <div class="card-body text-center">
-                    <h2>{{ language.name }}</h2>
-                    <a href="{{ path('app_list_lesson', { id: language.id }) }}" class="btn btn-primary">Voir leçon</a>
-                </div>
+                
             </div>
         </div>
         {% endfor %}

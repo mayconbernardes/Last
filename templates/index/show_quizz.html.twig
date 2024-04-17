@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">{{ quiz.title }}</h2>
                     <p class="card-text text-center mb-4">{{ quiz.description }}</p>
-                    <form method="POST" action="{{ path('app_show_quizz', {'id': quiz.id}) }}">
+                    <form id="quizForm" method="POST" action="{{ path('app_show_quizz', {'id': quiz.id}) }}">
                         {% for question in quiz.questions %}
                             <div class="card mb-4">
                                 <div class="card-body">
@@ -34,4 +34,29 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('quizForm').addEventListener('submit', function(event) {
+    // Get all radio buttons in the form
+    var radioButtons = document.querySelectorAll('input[type="radio"]');
+    var answeredQuestions = {};
+
+    // Loop through radio buttons and count answered questions
+    radioButtons.forEach(function(radioButton) {
+        if (radioButton.checked) {
+            var questionId = radioButton.getAttribute('name').replace('answers[', '').replace(']', '');
+            answeredQuestions[questionId] = true;
+        }
+    });
+
+    // verifier si les questions sont répondus 
+    var totalQuestions = {{ quiz.questions|length }};
+    var answeredCount = Object.keys(answeredQuestions).length;
+    if (answeredCount < totalQuestions) {
+        alert('Veuillez répondre à toutes les questions avant de soumettre.');
+        event.preventDefault(); 
+    }
+});
+</script>
+
 {% endblock %}

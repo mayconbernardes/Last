@@ -15,17 +15,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-
 class IndexController extends AbstractController
-
 {
     #[Route('/', name: 'app_index')]
+    // Page d'accueil de l'application
     public function index(): Response
     {
         return $this->render('index/index.html.twig');
     }
 
     #[Route('/lessons/{id}', name: 'app_list_lesson')]
+    // Afficher la liste des leçons
     public function listLessons(LessonRepository $lessonRepository, LanguageRepository $languageRepository, int $id = null): Response
     {
         return $this->render('index/list_lesson.html.twig', [
@@ -35,17 +35,21 @@ class IndexController extends AbstractController
     }
 
     #[Route('/mentionslegales', name: 'app_mentions')]
+    // Page des mentions légales
     public function mentions(): Response
     {
         return $this->render('index/mentionsLegales.html.twig');
     }
+
     #[Route('/aproposdenous', name: 'app_a_propos_de_nous')]
+    // Page à propos de nous
     public function apropos(): Response
     {
         return $this->render('index/AProposDeNous.html.twig');
     }
 
     #[Route('/quizzes', name: 'app_quizzes')]
+    // Afficher la liste des quizzes
     public function quizzes(QuizRepository $quizRepository): Response
     {
         return $this->render('index/list_quizz.html.twig', [
@@ -54,47 +58,45 @@ class IndexController extends AbstractController
     }
 
     #[Route('/show_quiz/{id}', name: 'app_show_quizz')]
+    // Afficher un quiz spécifique
     public function showQuiz(Request $request, Quiz $quiz, AnswerRepository $answerRepository, EntityManagerInterface $entityManager): Response
-{
-    $score = new Score();
-    $score->setQuiz($quiz);
-    $score->setUser($this->getUser());
+    {
+        $score = new Score();
+        $score->setQuiz($quiz);
+        $score->setUser($this->getUser());
 
-    if ($request->getMethod() === 'POST') {
-        $answers = $_POST['answers'];
-        $score->setDateCompleted(new \DateTimeImmutable());
+        if ($request->getMethod() === 'POST') {
+            $answers = $_POST['answers'];
+            $score->setDateCompleted(new \DateTimeImmutable());
 
-        foreach ($answers as $answer) {
-            $answerObjet = $answerRepository->find($answer);
-            if ($answerObjet->isIsCorrect()) {
-                $score->setScore($score->getScore() + 1);
+            foreach ($answers as $answer) {
+                $answerObjet = $answerRepository->find($answer);
+                if ($answerObjet->isIsCorrect()) {
+                    $score->setScore($score->getScore() + 1);
+                }
             }
+            $entityManager->persist($score);
+            $entityManager->flush();
+
+            // Récupérer l'URL de redirection à partir de la soumission du formulaire
+            $redirectUrl = $request->request->get('redirect_url');
+
+            // Rediriger l'utilisateur vers l'URL spécifiée
+            return $this->redirect($redirectUrl);
         }
-        $entityManager->persist($score);
-        $entityManager->flush();
 
-        // Retrieve the redirect URL from the form submission
-        $redirectUrl = $request->request->get('redirect_url');
-
-        // Redirect the user to the specified URL
-        return $this->redirect($redirectUrl);
-    }
-
-    return $this->render('index/show_quizz.html.twig', [
-        'quiz' => $quiz
-    ]);
+        return $this->render('index/show_quizz.html.twig', [
+            'quiz' => $quiz
+        ]);
     }
     
     #[Route('/language_selection', name: 'app_language_selection')]
+    // Sélection de la langue
     public function languageSelection(LanguageRepository $languageRepository): Response
-{
-    return $this->render('index/language_selection.html.twig', [
-        'languages' => $languageRepository->findAll()
-    ]);
-}
-    #[Route('/access-denied', name: 'app_access_denied')]
-    public function accessDenied(): Response
     {
-        return $this->render('index/access_denied.html.twig');
-}
+        return $this->render('index/language_selection.html.twig', [
+            'languages' => $languageRepository->findAll()
+        ]);
+    }
+
 }

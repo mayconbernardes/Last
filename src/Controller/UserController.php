@@ -11,9 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+// Contrôleur pour gérer les utilisateurs
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    // Affiche la liste des utilisateurs
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -22,6 +24,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    // Crée un nouvel utilisateur
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +45,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    // Affiche les détails d'un utilisateur
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -50,6 +54,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    // Modifie un utilisateur
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +73,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    // Supprime un utilisateur
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {

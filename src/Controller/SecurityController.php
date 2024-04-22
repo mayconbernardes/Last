@@ -8,30 +8,28 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-
+// Contrôleur pour gérer l'authentification et la déconnexion des utilisateurs
 class SecurityController extends AbstractController
 {
+    // Affiche le formulaire de connexion
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
+        // Obtient l'erreur de connexion s'il y en a une
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // Dernier nom d'utilisateur saisi par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-            #[Route(path: '/logout', name: 'app_logout')]
-        public function logout(): RedirectResponse
-        {
-            // No need to throw an exception or return anything else,
-            // Symfony will handle the redirection automatically.
+    // Déconnecte l'utilisateur
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): RedirectResponse
+    {
+        // Pas besoin de lever une exception ou de renvoyer autre chose,
+        // Symfony gérera la redirection automatiquement.
 
-            return $this->redirectToRoute('app_index');
-        }
+        return $this->redirectToRoute('app_index');
+    }
 }

@@ -1,9 +1,13 @@
+# Configuration des contrôleurs :
+# Charge les contrôleurs à partir du répertoire src/Controller/ et les associe à l'espace de noms App\Controller.
 controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
-    type: attribute
+    type: attribute  # Type de la ressource : attribut
+
+# Route pour marquer un quiz comme terminé.
 app_quiz_complete:
-    path: '/quiz/{id}/complete'
-    controller: 'App\Controller\QuizController::completeQuizAction'
-    methods: ['GET']
+    path: '/quiz/{id}/complete'  # URL de la route : /quiz/{id}/complete
+    controller: 'App\Controller\QuizController::completeQuizAction'  # Contrôleur responsable : QuizController::completeQuizAction
+    methods: ['GET']  # Méthode HTTP autorisée : GET

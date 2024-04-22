@@ -18,24 +18,24 @@ class ChangePasswordFormType extends AbstractType
         $builder
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passe ne correspondent pas.',
-                'required' => true,
-                'first_options'  => ['label' => 'Nouveau mot de passe'],
-                'second_options' => ['label' => 'Répéter le mot de passe'],
-                'mapped' => false,
+                'invalid_message' => 'Les mots de passe ne correspondent pas.', // Message affiché en cas de mots de passe non correspondants
+                'required' => true, // Le champ est requis
+                'first_options'  => ['label' => 'Nouveau mot de passe'], // Libellé du premier champ de saisie
+                'second_options' => ['label' => 'Répéter le mot de passe'], // Libellé du deuxième champ de saisie
+                'mapped' => false, // Ne mappez pas ce champ avec une propriété de l'entité
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe.',
+                        'message' => 'Veuillez entrer un mot de passe.', // Message affiché en cas de champ vide
                     ]),
                     new Length([
                         'min' => 12,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.', // Message affiché si le mot de passe est trop court
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                     new Regex([
-                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9]).{12,}$/',
-                        'message' => 'Veuillez vérifier que votre mot de passe respecte les conditions nécessaires.',
+                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9]).{12,}$/', // Expression régulière pour les exigences de mot de passe
+                        'message' => 'Veuillez vérifier que votre mot de passe respecte les conditions nécessaires.', // Message affiché si le mot de passe ne respecte pas les conditions
                     ]),
                 ],
             ])

@@ -12,9 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/quiz')]
+// Contrôleur pour la gestion des quizzes dans l'interface d'administration
 class QuizController extends AbstractController
 {
     #[Route('/', name: 'app_quiz_index', methods: ['GET'])]
+    // Afficher tous les quizzes
     public function index(QuizRepository $quizRepository): Response
     {
         return $this->render('quiz/index.html.twig', [
@@ -23,6 +25,7 @@ class QuizController extends AbstractController
     }
 
     #[Route('/new', name: 'app_quiz_new', methods: ['GET', 'POST'])]
+    // Créer un nouveau quiz
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $quiz = new Quiz();
@@ -43,6 +46,7 @@ class QuizController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'app_quiz_show', methods: ['GET'])]
+    // Afficher les détails d'un quiz
     public function show(Quiz $quiz): Response
     {
         return $this->render('quiz/show.html.twig', [
@@ -51,6 +55,7 @@ class QuizController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_quiz_edit', methods: ['GET', 'POST'])]
+    // Modifier un quiz existant
     public function edit(Request $request, Quiz $quiz, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(QuizType::class, $quiz);
@@ -68,8 +73,8 @@ class QuizController extends AbstractController
         ]);
     }
 
-
     #[Route('/{id}', name: 'app_quiz_delete', methods: ['POST'])]
+    // Supprimer un quiz
     public function delete(Request $request, Quiz $quiz, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$quiz->getId(), $request->request->get('_token'))) {
@@ -79,5 +84,4 @@ class QuizController extends AbstractController
 
         return $this->redirectToRoute('app_quiz_index', [], Response::HTTP_SEE_OTHER);
     }
-
 }

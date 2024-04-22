@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+// Contrôleur pour gérer les scores des utilisateurs
 class ScoreController extends AbstractController
 {
     private ScoreRepository $scoreRepository;
@@ -21,6 +22,7 @@ class ScoreController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    // Affiche les scores de l'utilisateur actuel
     #[Route('/scores', name: 'app_scores_for_user', methods: ['GET'])]
     public function scoresForUser(): Response
     {
@@ -32,6 +34,7 @@ class ScoreController extends AbstractController
         ]);
     }
 
+    // Soumet un formulaire de score
     #[Route('/submit-form', name: 'submit_form')]
     public function submitForm(Request $request): Response
     {
@@ -40,30 +43,30 @@ class ScoreController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // Retrieve the quiz ID from the form submission
+        // Récupère l'ID du quiz à partir de la soumission du formulaire
         $quizId = $request->request->get('quiz_id');
-        // Retrieve the score value from the form submission
+        // Récupère la valeur du score à partir de la soumission du formulaire
         $scoreValue = $request->request->get('score');
 
-        // Create a new Score entity and persist it
+        // Crée une nouvelle entité Score et la persiste
         $score = new Score();
-        $score->setUser($user); // Associate the score with the current user
+        $score->setUser($user); // Associe le score à l'utilisateur actuel
 
-        // Retrieve the quiz object based on the ID
+        // Récupère l'objet quiz en fonction de l'ID
         $quiz = $this->entityManager->getRepository(\App\Entity\Quiz::class)->find($quizId);
         if (!$quiz) {
-            // Handle the case when the quiz is not found
-            // For example, redirect back to the form with an error message
+            // Gère le cas où le quiz n'est pas trouvé
+            // Par exemple, redirige vers le formulaire avec un message d'erreur
         }
 
-        $score->setQuiz($quiz); // Set the quiz associated with the score
-        $score->setScore($scoreValue); // Set the score value
-        $score->setDateCompleted(new \DateTime()); // Set the completion date
+        $score->setQuiz($quiz); // Définit le quiz associé au score
+        $score->setScore($scoreValue); // Définit la valeur du score
+        $score->setDateCompleted(new \DateTime()); // Définit la date de complétion
 
         $this->entityManager->persist($score);
         $this->entityManager->flush();
 
-        // Redirect to the user_scores route
+        // Redirige vers la route user_scores
         return $this->redirectToRoute('app_scores_for_user');
     }
 }

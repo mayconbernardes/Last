@@ -1,32 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}  {# Utilisation d'un layout de base pour la cohérence de l'interface #}
 
-{% block title %}Quiz: {{ quiz.title }}{% endblock %}
+{% block title %}Quiz: {{ quiz.title }}{% endblock %}  {# Titre de la page optimisé pour le référencement avec le titre du quiz #}
 
 {% block body %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-lg my-4">
-                <div class="card-body">
-                    <h2 class="card-title text-center mb-4">{{ quiz.title }}</h2>
-                    <p class="card-text text-center mb-4">{{ quiz.description }}</p>
-                    <form id="quizForm" method="POST" action="{{ path('app_show_quizz', {'id': quiz.id}) }}">
-                        {% for question in quiz.questions %}
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ question.text }}</h5>
-                                    {% for answer in question.answers %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="{{ answer.id }}" name="answers[{{ question.id }}]" value="{{ answer.id }}"> 
-                                            <label class="form-check-label" for="{{ answer.id }}">{{ answer.text }}</label>
+<div class="container">  {# Structure principale de la page #}
+    <div class="row justify-content-center">  {# Centrage du contenu #}
+        <div class="col-md-8">  {# Colonne de largeur moyenne pour le contenu principal #}
+            <div class="card shadow-lg my-4">  {# Carte avec ombre pour une meilleure apparence #}
+                <div class="card-body">  {# Corps de la carte #}
+                    <h2 class="card-title text-center mb-4">{{ quiz.title }}</h2>  {# Titre du quiz #}
+                    <p class="card-text text-center mb-4">{{ quiz.description }}</p>  {# Description du quiz #}
+                    <form id="quizForm" method="POST" action="{{ path('app_show_quizz', {'id': quiz.id}) }}">  {# Formulaire de quiz #}
+                        {% for question in quiz.questions %}  {# Boucle sur les questions du quiz #}
+                            <div class="card mb-4">  {# Carte pour chaque question #}
+                                <div class="card-body">  {# Corps de la carte pour chaque question #}
+                                    <h5 class="card-title">{{ question.text }}</h5>  {# Texte de la question #}
+                                    {% for answer in question.answers %}  {# Boucle sur les réponses de la question #}
+                                        <div class="form-check">  {# Case à cocher pour chaque réponse #}
+                                            <input class="form-check-input" type="radio" id="{{ answer.id }}" name="answers[{{ question.id }}]" value="{{ answer.id }}">  {# Bouton radio pour chaque réponse #}
+                                            <label class="form-check-label" for="{{ answer.id }}">{{ answer.text }}</label>  {# Texte de la réponse #}
                                         </div>
                                     {% endfor %}
                                 </div>
                             </div>
                         {% endfor %}
-                        <input type="hidden" name="redirect_url" value="{{ path('app_quizzes', {'id': app.user.id}) }}">
-                        <p class="nav-item">
-                            <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+                        <input type="hidden" name="redirect_url" value="{{ path('app_quizzes', {'id': app.user.id}) }}">  {# Champ caché avec l'URL de redirection #}
+                        <p class="nav-item">  {# Paragraphe pour le bouton d'envoi #}
+                            <button type="submit" class="btn btn-primary btn-block">Envoyer</button>  {# Bouton d'envoi du formulaire #}
                         </p>
                     </form>
                 </div>
@@ -37,26 +37,34 @@
 
 <script>
 document.getElementById('quizForm').addEventListener('submit', function(event) {
-    // Get all radio buttons in the form
+    // Sélection de tous les boutons radio dans le formulaire
     var radioButtons = document.querySelectorAll('input[type="radio"]');
-    var answeredQuestions = {};
+    var answeredQuestions = {}; // Un objet pour stocker les questions auxquelles l'utilisateur a répondu
 
-    // Loop through radio buttons and count answered questions
+    // Boucle à travers les boutons radio et compte les questions auxquelles l'utilisateur a répondu
     radioButtons.forEach(function(radioButton) {
         if (radioButton.checked) {
+            // Récupère l'ID de la question à partir de l'attribut 'name' du bouton radio
             var questionId = radioButton.getAttribute('name').replace('answers[', '').replace(']', '');
+            // Stocke l'ID de la question comme clé dans l'objet answeredQuestions avec la valeur true
             answeredQuestions[questionId] = true;
         }
     });
 
-    // verifier si les questions sont répondus 
+    // Obtient le nombre total de questions dans le quiz via Twig
     var totalQuestions = {{ quiz.questions|length }};
+    // Obtient le nombre de questions auxquelles l'utilisateur a répondu en comptant les clés dans answeredQuestions
     var answeredCount = Object.keys(answeredQuestions).length;
+    
+    // Vérifie si l'utilisateur a répondu à toutes les questions
     if (answeredCount < totalQuestions) {
+        // Affiche une alerte si toutes les questions n'ont pas été répondues
         alert('Veuillez répondre à toutes les questions avant de soumettre.');
+        // Empêche l'envoi du formulaire en annulant l'événement de soumission
         event.preventDefault(); 
     }
 });
 </script>
+
 
 {% endblock %}

@@ -14,13 +14,13 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('roles')
-            ->add('password')
-            ->add('user', EntityType::class, [
-                'class' => Lesson::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+            ->add('email') // Champ pour l'email de l'utilisateur
+            ->add('roles') // Champ pour les rôles de l'utilisateur
+            ->add('password') // Champ pour le mot de passe de l'utilisateur
+            ->add('user', EntityType::class, [ // Champ pour lier l'utilisateur à une leçon
+                'class' => Lesson::class, // Entité cible
+                'choice_label' => 'id', // Champ utilisé comme libellé dans la liste déroulante
+                'multiple' => true, // Autoriser la sélection de plusieurs leçons
             ])
         ;
     }

@@ -18,12 +18,12 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email') // Champ pour l'email de l'utilisateur
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Vous devriez accepter nos conditions.',
+                        'message' => 'Vous devriez accepter nos conditions.', // Message si l'utilisateur ne coche pas la case
                     ]),
                 ],
             ])
@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['autocomplete' => 'new-password'], // Attribut pour désactiver l'autocomplétion
                 'constraints' => [
                     // new NotBlank([
                     //     'message' => 'Please enter a password',
@@ -45,12 +45,12 @@ class RegistrationFormType extends AbstractType
 
                     // Remplace the previous method for the following
 
-                    //At least one upper case, (?=.*?[A-Z])
-                    // At least one lower case, (?=.*?[a-z])
-                    // At least one digit, (?=.*?[0-9])
-                    // At least one special character, that is any character not included on the first 3 conditions, (?=.*?[^A-Za-z0-9])
-                    // Minimum eight in length .{8,}
-                  new Regex('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9]).{12,}$/', "Veuillez vérifier que votre mot de passe respecte les conditions nécessaires")  
+                    // Au moins une majuscule, (?=.*?[A-Z])
+                    // Au moins une minuscule, (?=.*?[a-z])
+                    // Au moins un chiffre, (?=.*?[0-9])
+                    // Au moins un caractère spécial, c'est-à-dire n'importe quel caractère non inclus dans les 3 premières conditions, (?=.*?[^A-Za-z0-9])
+                    // Minimum douze caractères de longueur .{12,}
+                    new Regex('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9]).{12,}$/', "Veuillez vérifier que votre mot de passe respecte les conditions nécessaires")  
                   
                 ],
             ])

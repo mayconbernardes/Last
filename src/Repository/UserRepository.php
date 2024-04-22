@@ -11,21 +11,26 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
- *
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * Repository pour l'entité User.
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    /**
+     * Constructeur de la classe.
+     *
+     * @param ManagerRegistry $registry Le registre de gestionnaire d'entités
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Utilisé pour mettre à niveau (re-hasher) automatiquement le mot de passe de l'utilisateur au fil du temps.
+     *
+     * @param PasswordAuthenticatedUserInterface $user L'utilisateur dont le mot de passe doit être mis à jour
+     * @param string $newHashedPassword Le nouveau mot de passe hashé
+     * @throws UnsupportedUserException Si l'objet utilisateur n'est pas pris en charge
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -33,10 +38,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
+        // Met à jour le mot de passe de l'utilisateur avec le nouveau mot de passe hashé
         $user->setPassword($newHashedPassword);
+
+        // Persiste les modifications de l'utilisateur dans la base de données
         $this->getEntityManager()->persist($user);
+        
+        // Effectue les modifications dans la base de données
         $this->getEntityManager()->flush();
     }
+
+    // Méthode générée automatiquement par Symfony, elle est commentée pour l'instant.
 
     //    /**
     //     * @return User[] Returns an array of User objects

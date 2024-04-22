@@ -8,18 +8,21 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Quiz>
- *
- * @method Quiz|null find($id, $lockMode = null, $lockVersion = null)
- * @method Quiz|null findOneBy(array $criteria, array $orderBy = null)
- * @method Quiz[]    findAll()
- * @method Quiz[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * Repository pour l'entité Quiz.
  */
 class QuizRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructeur de la classe.
+     *
+     * @param ManagerRegistry $registry Le registre de gestionnaire d'entités
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Quiz::class);
     }
+
+    // Méthodes générées automatiquement par Symfony, elles sont commentées pour l'instant.
 
     //    /**
     //     * @return Quiz[] Returns an array of Quiz objects

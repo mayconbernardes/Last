@@ -42,4 +42,10 @@
     </div>
 </div>
 {% endblock %}
- 
+
+{% block meta %}
+    {{ parent() }}
+    <meta name="description" content="Page de registrement sur notre site">
+    <meta name="keywords" content="inscription, enregistrement, compte utilisateur">
+    <meta name="robots" content="index, follow">
+{% endblock %}

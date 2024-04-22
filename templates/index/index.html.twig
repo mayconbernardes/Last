@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil | Languedo{% endblock %}
 
 {% block body %}
 <video autoplay muted loop id="video-background" plays-inline>
   <source src="video/.mp4" type="video/mp4">
 </video>
 
-<div class="app">
+<div class="app mt-4">
   <header>
     <h1>Prêt à vous amuser tout en apprenant ?</h1>
     <p>Explorez notre large gamme de leçons et de quiz pour enrichir votre expérience d'apprentissage.</p>
@@ -21,7 +21,7 @@
         <div class="tag"><span>#</span> Quiz</div>
         <div class="tag"><span>#</span> Transcriptions</div>
         <!-- duplicated content -->
-        <div class="tag"><span>#</span> Linquistique</div>
+        <div class="tag"><span>#</span> Linguistique</div>
         <div class="tag"><span>#</span> Écoute</div>
         <div class="tag"><span>#</span> Prononciation</div>
         <div class="tag"><span>#</span> Vocabulaire</div>
@@ -40,11 +40,11 @@
         <div class="tag"><span>#</span> Immersion</div>
         <div class="tag"><span>#</span> Enseignant</div>
         <div class="tag"><span>#</span> Maîtrise</div>
-        <div class="tag"><span>#</span> Prograssion</div>
+        <div class="tag"><span>#</span> Progression</div>
 
         <div class="tag"><span>#</span> Accent</div>
-        <div class="tag"><span>#</span> Répetition</div>
-        <div class="tag"><span>#</span> Context</div>
+        <div class="tag"><span>#</span> Répétition</div>
+        <div class="tag"><span>#</span> Contexte</div>
       </div>
     </div>
     <div class="loop-slider" style="--duration:15936ms; --direction:normal;">
@@ -60,7 +60,7 @@
             <div class="card border-0 shadow text-center mb-4">
                 <div class="card-body">
                     <h2 class="card-title">Leçons audio</h2>
-                     <img src="img/audio.jpg" alt="my logot" class="img-fluid" style="max-width: 100%; height: auto;">
+                     <img src="img/audio.jpg" alt="Leçons audio - Languedo" class="img-fluid" style="max-width: 100%; height: auto;">
                     <p class="card-text">Découvrez diverses leçons dans différentes langues.</p>
                     {% if app.user %}
                         <a href="{{ path('app_language_selection')}}" class="btn btn-primary btn-lg btn-block">Commencer</a>
@@ -74,7 +74,7 @@
             <div class="card border-0 shadow text-center">
                 <div class="card-body">
                     <h2 class="card-title">Quiz</h2>
-                     <img src="img/quiz.jpg" alt="my logot" class="img-fluid" style="max-width: 100%; height: auto;">
+                     <img src="img/quiz.jpg" alt="Quiz - Languedo" class="img-fluid" style="max-width: 100%; height: auto;">
                     <p class="card-text">Testez vos connaissances avec nos quiz interactifs.</p>
                     {% if app.user %}
                         <a href="{{ path('app_quizzes') }}" class="btn btn-primary btn-lg btn-block">Commencer</a>
@@ -92,7 +92,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="text-center">
-                            <img src="img/lang.jpeg" alt="Apprentissage des Langues" class="img-fluid" style="width: 100%; max-height: calc(100vh - 200px); height: auto;">
+                            <img src="img/lang.jpeg" alt="Apprentissage des Langues - Languedo" class="img-fluid" style="width: 100%; max-height: calc(100vh - 200px); height: auto;">
                         </div>
                     </div>
                 </div>

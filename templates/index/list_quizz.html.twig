@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Quiz{% endblock %}
+{% block title %}Quiz - Languedo{% endblock %}
 
 {% block body %}
 <h1 class="text-center">Quiz</h1>
@@ -23,10 +23,10 @@
                         <div class="card card-body">
                             {% set quizScore = app.user ? app.user.id(quiz.id) %}
                             {% if quizScore %}
-                            <hr>
+                                <hr>
                             {% else %}
-                            <hr>
-                            <p class="text-center">No score available</p>
+                                <hr>
+                                <p class="text-center">No score available</p>
                             {% endif %}
                             <div class="container mt-4">
                                 <div class="table-responsive">

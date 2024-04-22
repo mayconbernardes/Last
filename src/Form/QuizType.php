@@ -43,9 +43,10 @@ class QuizType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         // Définit la classe de données par défaut pour le formulaire
+        // Attention, il y a une erreur ici, 'data_class' ne peut être défini qu'une seule fois
         $resolver->setDefaults([
             'data_class' => Quiz::class,
-            'data_class' => Score::class, // Attention, il y a une erreur ici, 'data_class' ne peut être défini qu'une seule fois
+            'data_class' => Score::class,
         ]);
     }
 }

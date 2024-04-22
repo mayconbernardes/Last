@@ -8,18 +8,21 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Question>
- *
- * @method Question|null find($id, $lockMode = null, $lockVersion = null)
- * @method Question|null findOneBy(array $criteria, array $orderBy = null)
- * @method Question[]    findAll()
- * @method Question[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * Repository pour l'entité Question.
  */
 class QuestionRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructeur de la classe.
+     *
+     * @param ManagerRegistry $registry Le registre de gestionnaire d'entités
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Question::class);
     }
+
+    // Méthodes générées automatiquement par Symfony, elles sont commentées pour l'instant.
 
     //    /**
     //     * @return Question[] Returns an array of Question objects

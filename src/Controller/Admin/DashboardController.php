@@ -20,40 +20,38 @@ class DashboardController extends AbstractDashboardController
 {
     private $adminUrlGenerator;
 
+    // Constructeur pour injecter AdminUrlGenerator
     public function __construct(AdminUrlGenerator $adminUrlGenerator)
     {
         $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
     #[Route('/admin', name: 'admin')]
+    // Action Index pour le tableau de bord de l'administration
     public function index(): Response
     {
-        // Redirect to the Quiz CRUD page
+        // Redirige vers la page CRUD de Quiz
         return $this->redirect($this->adminUrlGenerator->setController(QuizCrudController::class)->generateUrl());
     }
 
+    // Configure l'apparence du tableau de bord
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Languedo');
     }
 
+    // Configure les éléments de menu affichés dans la barre latérale
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fas fa-home');
+        // Définit des liens vers différentes pages CRUD
+        yield MenuItem::linkToDashboard('Tableau de bord', 'fas fa-home');
         yield MenuItem::linkToCrud('Quiz', 'fas fa-puzzle-piece', Quiz::class);
-        yield MenuItem::linkToCrud('Lesson', 'fas fa-book', Lesson::class);
-        yield MenuItem::linkToCrud('Language', 'fas fa-language', Language::class);
-        yield MenuItem::linkToCrud('Answer', 'fas fa-check', Answer::class);
+        yield MenuItem::linkToCrud('Leçon', 'fas fa-book', Lesson::class);
+        yield MenuItem::linkToCrud('Langue', 'fas fa-language', Language::class);
+        yield MenuItem::linkToCrud('Réponse', 'fas fa-check', Answer::class);
         yield MenuItem::linkToCrud('Question', 'fas fa-question', Question::class);
         yield MenuItem::linkToCrud('Score', 'fas fa-star', Score::class);
-        yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
-
-
-
-
-
-
-
+        yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class);
     }
 }

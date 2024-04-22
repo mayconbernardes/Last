@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Choisir une langue{% endblock %}
+{% block title %}Choisir une langue - Languedo{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="text-center mt-5 mb-4">Choisir une langue</h1>
-        <div class="row justify-content-center">
-            {% for language in languages %}
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h2 class="card-title">{{ language.name }}</h2>
-                            <a href="{{ path('app_list_lesson', { id: language.id }) }}" class="btn btn-primary">Voir les leçons</a>
-                        </div>
-                    </div>
+<div class="container">
+    <h1 class="text-center mt-5 mb-4">Choisir une langue</h1>
+    <div class="row justify-content-center">
+        {% for language in languages %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h2 class="card-title">{{ language.name }}</h2>
+                    <a href="{{ path('app_list_lesson', { id: language.id }) }}" class="btn btn-primary">Voir les leçons de {{ language.name }}</a>
                 </div>
-            {% endfor %}
+            </div>
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

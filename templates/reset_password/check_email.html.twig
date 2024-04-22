@@ -24,3 +24,9 @@
     </div>
 </main>
 {% endblock %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta name="description" content="Email de réinitialisation de mot de passe envoyé">
+    <meta name="robots" content="noindex, nofollow">
+{% endblock %}

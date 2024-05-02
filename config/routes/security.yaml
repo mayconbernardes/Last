@@ -2,3 +2,4 @@
 _security_logout:
     resource: security.route_loader.logout  # Gère la déconnexion en utilisant un service dédié.
     type: service  # Type de la ressource : service
+

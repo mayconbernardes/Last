@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Leçons - Languedo{% endblock %}
+{% block title %}Leçons{% endblock %}
 
 {% block body %}
 <h1 class="text-center">Leçon</h1>
@@ -17,25 +17,26 @@
     </div>
 </div>
 
-{# Right Column: Lessons #}
-<div class="row justify-content-center">
-    <div class="col-md-8 row justify-content-center" id="lessons-column">
-        <ul class="list-group">
-            {# Loop through each lesson #}
-            {% for lesson in lessons %}
-                {# Audio player for the lesson #}
-                <audio controls style="width:100%">
-                    <source src="{{ lesson.src }}" type="audio/mp3">
-                </audio>
+        {# Right Column: Lessons #}
+       <div class="row justify-content-center">
+        <div class="col-md-8 row justify-content-center" id="lessons-column">
+            <ul class="list-group">
+                {# Loop through each lesson #}
+                {% for plop in lessons %}
+                    {# Audio player for the lesson #}
+                    <audio controls style="width:100%">
+                        <source src="{{ plop.src }}" type="audio/mp3">
+                    </audio>
 
-                {# Displaying the title of the lesson #}
-                <h2 class="list-group-item text-center">- {{ lesson.title }}</h2>
-                
-                {# Displaying the transcription and language of the lesson #}
-                <li class="list-group-item">{{ lesson.transcription }} - {{ lesson.language.name }}</li>
-            {% endfor %}
-        </ul>
+                    {# Displaying the title of the lesson #}
+                    <h2 class="list-group-item text-center">- {{ plop.title }}</h2>
+                    
+                    {# Displaying the transcription and language of the lesson #}
+                    <li class="list-group-item">{{ plop.transcription }} - {{ plop.language.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+     </div>
     </div>
-</div>
 </div>
 {% endblock %}

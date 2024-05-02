@@ -32,6 +32,7 @@ security:
         - { path: ^/admin/quiz, roles: ROLE_ADMIN }
         - { path: ^/admin/lesson, roles: ROLE_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_ADMIN }
 
 
 

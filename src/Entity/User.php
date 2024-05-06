@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = []; // Rôles de l'utilisateur
 
     /**
-     * @var string The hashed password
+     * @var string mot de passe hashé
      */
     #[ORM\Column]
     private ?string $password = null; // Mot de passe haché de l'utilisateur

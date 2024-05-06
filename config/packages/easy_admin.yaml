@@ -1,0 +1,10 @@
+# config/packages/easy_admin.yaml
+
+easy_admin:
+    entities:
+        Lesson:
+            class: App\Entity\Lesson
+        Quiz:
+            class: App\Entity\Quiz
+        User:
+            class: App\Entity\User

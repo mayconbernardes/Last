@@ -31,7 +31,8 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         // Redirige vers la page CRUD de Quiz
-        return $this->redirect($this->adminUrlGenerator->setController(QuizCrudController::class)->generateUrl());
+        return $this->redirect($this->adminUrlGenerator->setController
+        (QuizCrudController::class)->generateUrl());
     }
 
     // Configure l'apparence du tableau de bord

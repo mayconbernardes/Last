@@ -6,6 +6,7 @@ use App\Repository\QuizRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 // Entité représentant un quiz
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
@@ -17,6 +18,7 @@ class Quiz
     private ?int $id = null; // Identifiant unique du quiz
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $title = null; // Titre du quiz
 
     #[ORM\Column(type: 'text')]
